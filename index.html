@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <script src="script.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="menuIcon">☰</div>
+    <nav id="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="projects.html">Projects</a></li>
+        </ul>
+        <div id="nameEmblem"></div>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const emblem = document.getElementById('nameEmblem');
+                if (emblem) {
+                    const texts = ['M@', 'Matt'];
+                    let currentText = '';
+                    let currentIndex = 0;
+                    let deleting = false;
+                    let textIndex = 0;
+            
+                    function type() {
+                        if (deleting && currentIndex > 0) {
+                            currentText = '>' + texts[textIndex].substring(0, currentIndex - 1);
+                            currentIndex--;
+                        } else if (!deleting && currentIndex < texts[textIndex].length) {
+                            currentText = '>' + texts[textIndex].substring(0, currentIndex + 1);
+                            currentIndex++;
+                        }
+            
+                        emblem.textContent = currentText;
+            
+                        if (!deleting && currentIndex == texts[textIndex].length) {
+                            if (textIndex === texts.length - 1) {
+                                // Once the final word is fully typed, stop the typing effect.
+                                emblem.textContent += ''; // Add the cursor manually
+                                return; // Stop the recursive function call
+                            }
+                            // Start deleting after a pause for other words
+                            setTimeout(() => { deleting = true; }, 1000);
+                        } else if (deleting && currentIndex === 0) {
+                            deleting = false;
+                            textIndex = (textIndex + 1) % texts.length;
+                        }
+            
+                        let typingSpeed = deleting ? 100 : 200; // Milliseconds
+                        setTimeout(type, typingSpeed);
+                    }
+            
+                    // Start typing animation
+                    type();
+                }
+            });
+            </script>
+    </nav>
+    <!-- put about/project section/divs here! -->
+    <canvas id="cubeCanvas"></canvas>
+</body>
+
+</html>

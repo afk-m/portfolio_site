@@ -1,0 +1,187 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', monospace;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    position: relative;
+    background-color: rgba(0,0,0,0.8);
+}
+
+#menuIcon, #navbar {
+    position: fixed;
+    z-index: 1001; /* Ensure these elements are above all other content */
+}
+
+#menuIcon {
+    top: 40px;
+    left: 40px;
+    background-color: white;
+    padding: 5px;
+    border-radius: 10px;
+    z-index: 1002;
+}
+
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+    flex-direction: row; /* Ensure horizontal layout */
+}
+
+#navbar.none {
+    display: none;
+    /* Hide the navbar when the class is added */
+}
+
+#navbar ul {
+    list-style: none;
+    padding: 30px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#navbar li {
+    margin: 0 10px;
+}
+
+#navbar a {
+    text-decoration: none;
+    color: white;
+}
+
+#nameEmblem {
+    /* Align horizontally with the <ul> */
+    position: absolute;
+    right: 60px;
+    color: white;
+    font-size: 70px;
+}
+
+#nameEmblem:after {
+    content: '_';
+    animation: blink 1s infinite step-start;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Adjustments for mobile layout */
+@media (max-width: 768px) {
+    #nameEmblem {
+        position: fixed;
+        text-align: center;
+        bottom: 20px;
+        top: auto;
+        right: 20px;
+        background-color: black;
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    #navbar {
+        /* Adjust navbar layout for mobile */
+        flex-direction: column; /* Stack items vertically */
+    }
+
+    #navbar ul {
+        flex-direction: column;
+    }
+}
+
+canvas {
+    display: block; /* Remove default inline display */
+    position: fixed; /* Position it fixed to cover the whole screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensures the canvas is behind everything else */
+}
+
+/* About Page Styles */
+#aboutSection, #projectsGrid {
+    margin-top: 100px;
+    padding-bottom: 100px;
+    width: 70%; /* Adjust width as needed */
+    max-width: 1200px; /* Optional: Sets a max-width for wider screens */
+    /* box-sizing: border-box; */
+    padding: 20px;
+    background: white; /* For visibility, adjust according to your design */
+    border: 2px solid green; /* Specific to the About section, but can be adjusted or removed */
+    opacity: 0.8; /* Specific to the Projects grid */
+    padding: 100px;
+}
+
+#aboutSection {
+    margin-top: 700px;
+    background-color: white; /* Ensures the about section has a solid background */
+    color: black; /* Text color */
+    /* Other styles remain as previously defined */
+    gap: 20px; /* Space between grid items */
+    padding: 20px; /* Padding around the grid */
+    justify-content: center; /* Center grid items horizontally */
+    align-items: center; /* Center grid items vertically */
+}
+
+#projectsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Creates a responsive grid */
+    gap: 20px; /* Space between grid items */
+    padding: 20px; /* Padding around the grid */
+    justify-content: center; /* Center grid items horizontally */
+    align-items: center; /* Center grid items vertically */
+    width: 80%; /* Grid width */
+}
+
+.projectItem {
+    background-color: #f9f9f9; /* Light background color for visibility */
+    border: 1px solid #ccc; /* Border for each project item */
+    position: relative; /* Positioning context for the aspect ratio hack */
+    overflow: hidden; /* Ensures no overflow of content outside the square */
+}
+
+.projectItem::before {
+    content: '';
+    display: block;
+    padding-top: 100%; /* Aspect ratio hack to maintain square shape */
+}
+
+.projectItemContent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    #aboutSection, #projectsGrid {
+        width: 70%; /* Allows the content to take up more space on smaller screens */
+        /* margin-top: 70px; Adjusted for smaller screen sizes */
+    }
+}
